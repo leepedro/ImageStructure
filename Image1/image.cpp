@@ -183,8 +183,8 @@ namespace Imaging
 		this->EvalRoi(roiSrc);
 
 		ImageFrame imgDst;
-		ROI whole{ { 0, 0 }, this->size };
-		if (roiSrc == whole)
+		//ROI whole{ { 0, 0 }, this->size };
+		if (roiSrc == ROI{ { 0, 0 }, this->size })
 			imgDst.data_ = this->data;	// Copy entire image.
 		else
 		{	// Copy ROI line by line.

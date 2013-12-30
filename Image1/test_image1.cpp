@@ -8,6 +8,10 @@ void TestImage(void)
 	ImageFrame::ROI roi1;
 	ImageFrame::ROI roi2 = { { 0, 0 }, { 64, 32 } };
 	ImageFrame::ROI roi3{ { 0, 0 }, { 64, 32 } };
+	if (roi2 == roi3)
+		std::cout << "good" << std::endl;
+	if (roi2 == ImageFrame::ROI{ { 0, 0 }, roi3.size })
+		std::cout << "good" << std::endl;
 
 	ImageFrame img1;
 	img1.Reset<unsigned char>({ 16, 8 }, 3);

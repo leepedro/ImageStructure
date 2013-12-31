@@ -14,9 +14,11 @@ Uses the downloadable SafeInt.hpp from http://safeint.codeplex.com/ for other co
 #include <typeinfo>
 
 #if defined(_MSC_VER)
+// Use the built-in safeint.h for Visual C++.
 #include <safeint.h>
 using namespace msl::utilities;
 #else
+// Use the downloadable SafeInt.hpp from http://safeint.codeplex.com/ for other compilers.
 #include "SafeInt.hpp"
 #endif
 
@@ -61,7 +63,7 @@ namespace Imaging
 	template <typename T, typename U>
 	void Add_imp(T t, U u, T &result, std::true_type, std::false_type)
 	{
-		static_assert(std::is_integral<T>::value && !std::is_integral<U>::value,
+		static_assert(!std::is_integral<T>::value || std::is_integral<U>::value,
 			"Unsupported scenario.");
 	}
 
@@ -104,7 +106,7 @@ namespace Imaging
 	template <typename T, typename U>
 	void Subtract_imp(T t, U u, T &result, std::true_type, std::false_type)
 	{
-		static_assert(std::is_integral<T>::value && !std::is_integral<U>::value,
+		static_assert(!std::is_integral<T>::value || std::is_integral<U>::value,
 			"Unsupported scenario.");
 	}
 
@@ -147,7 +149,7 @@ namespace Imaging
 	template <typename T, typename U>
 	void Multiply_imp(T t, U u, T &result, std::true_type, std::false_type)
 	{
-		static_assert(std::is_integral<T>::value && !std::is_integral<U>::value,
+		static_assert(!std::is_integral<T>::value || std::is_integral<U>::value,
 			"Unsupported scenario.");
 	}
 
